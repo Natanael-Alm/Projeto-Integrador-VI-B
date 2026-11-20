@@ -44,7 +44,7 @@
 | Código | Requisito |
 |---|---|
 | RNF01 | Funcionar **100% offline**, com banco de dados SQLite local |
-| RNF02 | Rodar em Android 6.0 (API 23) ou superior |
+| RNF02 | Rodar em Android 7.0 (API 24) ou superior |
 | RNF03 | Interface simples, com navegação por barra inferior e textos legíveis |
 | RNF04 | Resposta das consultas do painel em menos de 2 segundos para até 5.000 pedidos |
 | RNF05 | Dados armazenados somente no aparelho, sem envio a servidores externos |

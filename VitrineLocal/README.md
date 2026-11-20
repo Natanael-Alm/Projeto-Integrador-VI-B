@@ -44,6 +44,10 @@ Questão norteadora do projeto: *"Qual aplicativo de celular pode auxiliar no cr
 ```
 VitrineLocal/
 ├── README.md
+├── pubspec.yaml
+├── lib/              código do aplicativo
+├── test/             testes automatizados
+├── android/          projeto Android gerado pelo Flutter
 ├── docs/
 │   ├── 01-nome.md
 │   ├── 02-problema.md

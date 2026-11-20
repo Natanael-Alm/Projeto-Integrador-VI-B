@@ -13,7 +13,7 @@ O aplicativo será desenvolvido em **Flutter**, que compila o código Dart para 
 
 ### 1. Definir a identidade do aplicativo
 - Nome exibido: em `android/app/src/main/AndroidManifest.xml` (atributo `android:label`)
-- Identificador do pacote (`applicationId`): em `android/app/build.gradle`
+- Identificador do pacote (`applicationId`): em `android/app/build.gradle.kts`
 - Versão: em `pubspec.yaml` (`version: 1.0.0+1`)
 - Ícone: gerado com o pacote [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
 
@@ -27,7 +27,7 @@ flutter run            # emulador Android ou celular com depuração USB
 ```bash
 keytool -genkey -v -keystore ~/vitrine-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias vitrine
 ```
-Criar o arquivo `android/key.properties` (**não versionar no Git**) com `storePassword`, `keyPassword`, `keyAlias` e `storeFile`, e referenciá-lo em `android/app/build.gradle` na configuração `signingConfigs`.
+Criar o arquivo `android/key.properties` (**não versionar no Git**) com `storePassword`, `keyPassword`, `keyAlias` e `storeFile`, e referenciá-lo em `android/app/build.gradle.kts` na configuração `signingConfigs`.
 
 ### 4. Gerar o APK de produção
 ```bash

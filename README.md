@@ -39,6 +39,26 @@ Questão norteadora do projeto: *"Qual aplicativo de celular pode auxiliar no cr
 | 9. Tecnologias, bibliotecas e linguagens | [09-tecnologias.md](VitrineLocal/docs/09-tecnologias.md) |
 | 10. Banco de dados local | [10-banco-local.md](VitrineLocal/docs/10-banco-local.md) |
 
+## Como executar
+
+Pré-requisitos: [Flutter](https://docs.flutter.dev/get-started/install) 3.50 ou superior e Android Studio com o Android SDK (veja [08-geracao-apk.md](VitrineLocal/docs/08-geracao-apk.md)).
+
+```bash
+cd VitrineLocal
+flutter pub get
+flutter test        # testes automatizados
+flutter run         # emulador ou celular com depuração USB
+```
+
+## Andamento
+
+| Módulo | Situação |
+|---|---|
+| Base: banco SQLite, navegação, tema | Concluído |
+| Catálogo (RF01–RF06) e Sobre (RF20) | Concluído |
+| Clientes e Pedidos (RF07–RF12) | Próxima etapa |
+| Painel e Relatórios (RF13–RF19) | Próxima etapa |
+
 ## Estrutura do repositório
 
 ```
@@ -46,6 +66,10 @@ Questão norteadora do projeto: *"Qual aplicativo de celular pode auxiliar no cr
 ├── README.md
 └── VitrineLocal/
     ├── README.md
+    ├── pubspec.yaml
+    ├── lib/              código do aplicativo (ver 10-banco-local.md)
+    ├── test/             testes automatizados
+    ├── android/          projeto Android gerado pelo Flutter
     ├── docs/
     │   ├── 01-nome.md
     │   ├── 02-problema.md

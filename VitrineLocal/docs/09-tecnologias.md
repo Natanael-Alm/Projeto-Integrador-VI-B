@@ -5,7 +5,8 @@
 | Item | Uso | Link |
 |---|---|---|
 | Dart | Linguagem de programação | https://dart.dev |
-| Flutter | Framework para o aplicativo móvel | https://flutter.dev |
+| Flutter 3.50 | Framework para o aplicativo móvel | https://flutter.dev |
+| material_ui | Componentes Material Design (separados do Flutter a partir da versão 3.47) | https://pub.dev/packages/material_ui |
 | SQL | Consultas e criação das tabelas | https://www.sqlite.org/lang.html |
 
 ## Banco de dados local
@@ -16,6 +17,7 @@
 | sqflite | Acesso ao SQLite no Flutter | https://pub.dev/packages/sqflite |
 | path | Montagem do caminho do arquivo do banco | https://pub.dev/packages/path |
 | path_provider | Localização das pastas do aplicativo | https://pub.dev/packages/path_provider |
+| sqflite_common_ffi | Banco em memória nos testes automatizados (somente desenvolvimento) | https://pub.dev/packages/sqflite_common_ffi |
 
 ## Bibliotecas do aplicativo
 
@@ -44,4 +46,4 @@
 
 | Item | Detalhe | Link |
 |---|---|---|
-| Android | Android 6.0 (API 23) ou superior | https://developer.android.com |
+| Android | Android 7.0 (API 24) ou superior, mínimo exigido pelo `image_picker` e pelo Flutter atual | https://developer.android.com |

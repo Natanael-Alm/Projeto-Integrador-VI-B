@@ -31,16 +31,20 @@ Telas (Widgets)  →  Providers (estado)  →  Repositórios (DAO)  →  Databas
 
 ```
 lib/
-├── main.dart
+├── main.dart              inicialização e providers
+├── app.dart               tema e navegação inferior
 ├── database/
 │   ├── database_helper.dart
-│   └── migrations.dart
+│   └── esquema.dart       comandos DDL de 05-modelo-er.md
 ├── models/
 ├── repositories/
-├── providers/
-├── screens/
-└── widgets/
+├── providers/             um provider por módulo
+├── screens/               uma pasta por módulo (catalogo/, mais/...)
+├── widgets/
+└── utils/                 formatação de moeda e datas, fotos, texto do catálogo
 ```
+
+> **Compatibilidade:** o SQLite do sistema Android 7 não tem *window functions* nem `UPSERT`. Por isso, a curva ABC, a média móvel e a classificação de clientes são calculadas em Dart a partir de consultas `GROUP BY` simples.
 
 ### Abertura do banco e criação das tabelas
 
@@ -60,7 +64,11 @@ class DatabaseHelper {
       version: 1,
       onConfigure: (db) => db.execute('PRAGMA foreign_keys = ON'),
       onCreate: (db, version) async {
-        // executa o script DDL descrito em docs/05-modelo-er.md
+        final lote = db.batch();
+        for (final comando in comandosCriacao) {
+          lote.execute(comando);
+        }
+        await lote.commit(noResult: true);
       },
     );
   }
