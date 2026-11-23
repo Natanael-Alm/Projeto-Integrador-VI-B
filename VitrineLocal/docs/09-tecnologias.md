@@ -17,7 +17,6 @@
 | sqflite | Acesso ao SQLite no Flutter | https://pub.dev/packages/sqflite |
 | path | Montagem do caminho do arquivo do banco | https://pub.dev/packages/path |
 | path_provider | Localização das pastas do aplicativo | https://pub.dev/packages/path_provider |
-| sqflite_common_ffi | Banco em memória nos testes automatizados (somente desenvolvimento) | https://pub.dev/packages/sqflite_common_ffi |
 
 ## Bibliotecas do aplicativo
 

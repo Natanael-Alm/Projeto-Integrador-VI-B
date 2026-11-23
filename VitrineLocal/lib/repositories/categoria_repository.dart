@@ -2,10 +2,7 @@ import '../database/database_helper.dart';
 import '../models/categoria.dart';
 
 class CategoriaRepository {
-  CategoriaRepository([DatabaseHelper? helper])
-      : _helper = helper ?? DatabaseHelper.instance;
-
-  final DatabaseHelper _helper;
+  final _helper = DatabaseHelper.instance;
 
   Future<List<Categoria>> listar() async {
     final db = await _helper.database;

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'app.dart';
 import 'providers/catalogo_provider.dart';
+import 'providers/cliente_provider.dart';
 import 'providers/empresa_provider.dart';
 
 Future<void> main() async {
@@ -17,6 +18,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => CatalogoProvider()..carregar()),
         ChangeNotifierProvider(create: (_) => EmpresaProvider()..carregar()),
+        ChangeNotifierProvider(create: (_) => ClienteProvider()..carregar()),
       ],
       child: const VitrineApp(),
     ),

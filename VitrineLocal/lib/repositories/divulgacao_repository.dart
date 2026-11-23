@@ -2,10 +2,7 @@ import '../database/database_helper.dart';
 import '../models/divulgacao.dart';
 
 class DivulgacaoRepository {
-  DivulgacaoRepository([DatabaseHelper? helper])
-      : _helper = helper ?? DatabaseHelper.instance;
-
-  final DatabaseHelper _helper;
+  final _helper = DatabaseHelper.instance;
 
   Future<int> registrar(Divulgacao divulgacao) async {
     final db = await _helper.database;

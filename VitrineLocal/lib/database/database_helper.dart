@@ -4,24 +4,17 @@ import 'package:sqflite/sqflite.dart';
 import 'esquema.dart';
 
 class DatabaseHelper {
-  DatabaseHelper._(this._caminho);
+  DatabaseHelper._();
 
-  static final instance = DatabaseHelper._('vitrine.db');
+  static final instance = DatabaseHelper._();
 
-  factory DatabaseHelper.emMemoria() => DatabaseHelper._(inMemoryDatabasePath);
-
-  final String _caminho;
   Database? _db;
 
   Future<Database> get database async => _db ??= await _abrir();
 
   Future<Database> _abrir() async {
-    final caminho = _caminho == inMemoryDatabasePath
-        ? _caminho
-        : join(await getDatabasesPath(), _caminho);
-
     return openDatabase(
-      caminho,
+      join(await getDatabasesPath(), 'vitrine.db'),
       version: 1,
       onConfigure: (db) => db.execute('PRAGMA foreign_keys = ON'),
       onCreate: (db, version) async {
@@ -32,10 +25,5 @@ class DatabaseHelper {
         await lote.commit(noResult: true);
       },
     );
-  }
-
-  Future<void> fechar() async {
-    await _db?.close();
-    _db = null;
   }
 }

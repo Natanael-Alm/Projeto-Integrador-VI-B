@@ -4,10 +4,7 @@ import '../database/database_helper.dart';
 import '../models/produto.dart';
 
 class ProdutoRepository {
-  ProdutoRepository([DatabaseHelper? helper])
-      : _helper = helper ?? DatabaseHelper.instance;
-
-  final DatabaseHelper _helper;
+  final _helper = DatabaseHelper.instance;
 
   Future<List<Produto>> listar({
     String busca = '',

@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import 'screens/catalogo/tela_catalogo.dart';
+import 'screens/clientes/tela_clientes.dart';
 import 'screens/mais/tela_mais.dart';
 import 'screens/tela_em_breve.dart';
 
@@ -46,7 +47,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
     TelaEmBreve(titulo: 'Vitrine', icone: Icons.dashboard_outlined),
     TelaCatalogo(),
     TelaEmBreve(titulo: 'Pedidos', icone: Icons.receipt_long_outlined),
-    TelaEmBreve(titulo: 'Clientes', icone: Icons.people_outline),
+    TelaClientes(),
     TelaMais(),
   ];
 

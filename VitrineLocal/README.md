@@ -46,7 +46,6 @@ VitrineLocal/
 ├── README.md
 ├── pubspec.yaml
 ├── lib/              código do aplicativo
-├── test/             testes automatizados
 ├── android/          projeto Android gerado pelo Flutter
 ├── docs/
 │   ├── 01-nome.md

@@ -4,10 +4,7 @@ import '../database/database_helper.dart';
 import '../models/empresa.dart';
 
 class EmpresaRepository {
-  EmpresaRepository([DatabaseHelper? helper])
-      : _helper = helper ?? DatabaseHelper.instance;
-
-  final DatabaseHelper _helper;
+  final _helper = DatabaseHelper.instance;
 
   Future<Empresa?> buscar() async {
     final db = await _helper.database;

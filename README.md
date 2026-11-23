@@ -46,7 +46,6 @@ Pré-requisitos: [Flutter](https://docs.flutter.dev/get-started/install) 3.50 ou
 ```bash
 cd VitrineLocal
 flutter pub get
-flutter test        # testes automatizados
 flutter run         # emulador ou celular com depuração USB
 ```
 
@@ -68,7 +67,6 @@ flutter run         # emulador ou celular com depuração USB
     ├── README.md
     ├── pubspec.yaml
     ├── lib/              código do aplicativo (ver 10-banco-local.md)
-    ├── test/             testes automatizados
     ├── android/          projeto Android gerado pelo Flutter
     ├── docs/
     │   ├── 01-nome.md

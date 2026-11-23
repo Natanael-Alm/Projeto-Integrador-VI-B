@@ -4,10 +4,7 @@ import '../models/empresa.dart';
 import '../repositories/empresa_repository.dart';
 
 class EmpresaProvider extends ChangeNotifier {
-  EmpresaProvider([EmpresaRepository? repositorio])
-      : _repositorio = repositorio ?? EmpresaRepository();
-
-  final EmpresaRepository _repositorio;
+  final _repositorio = EmpresaRepository();
 
   Empresa? empresa;
 

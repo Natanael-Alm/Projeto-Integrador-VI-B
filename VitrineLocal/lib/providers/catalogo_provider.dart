@@ -9,17 +9,9 @@ import '../repositories/produto_repository.dart';
 import '../utils/imagens.dart';
 
 class CatalogoProvider extends ChangeNotifier {
-  CatalogoProvider({
-    ProdutoRepository? produtos,
-    CategoriaRepository? categorias,
-    DivulgacaoRepository? divulgacoes,
-  })  : _produtoRepo = produtos ?? ProdutoRepository(),
-        _categoriaRepo = categorias ?? CategoriaRepository(),
-        _divulgacaoRepo = divulgacoes ?? DivulgacaoRepository();
-
-  final ProdutoRepository _produtoRepo;
-  final CategoriaRepository _categoriaRepo;
-  final DivulgacaoRepository _divulgacaoRepo;
+  final _produtoRepo = ProdutoRepository();
+  final _categoriaRepo = CategoriaRepository();
+  final _divulgacaoRepo = DivulgacaoRepository();
 
   List<Produto> produtos = [];
   List<Categoria> categorias = [];
