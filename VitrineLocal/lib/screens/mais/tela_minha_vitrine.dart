@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/empresa.dart';
 import '../../providers/empresa_provider.dart';
+import '../../utils/imagens.dart';
 import '../../widgets/seletor_foto.dart';
 import '../catalogo/compartilhar_catalogo.dart';
 
@@ -22,10 +23,12 @@ class _TelaMinhaVitrineState extends State<TelaMinhaVitrine> {
   late final _instagram = TextEditingController(text: _atual?.instagram);
   late final _horario =
       TextEditingController(text: _atual?.horarioAtendimento);
-  late String? _logoPath = _atual?.logoPath;
+  late String? _logoSalvo = _atual?.logoPath;
+  late String? _logoPath = _logoSalvo;
 
   @override
   void dispose() {
+    if (_logoPath != _logoSalvo) excluirFoto(_logoPath);
     for (final campo in [_nome, _slogan, _whatsapp, _instagram, _horario]) {
       campo.dispose();
     }
@@ -49,7 +52,14 @@ class _TelaMinhaVitrineState extends State<TelaMinhaVitrine> {
           horarioAtendimento: _opcional(_horario),
           logoPath: _logoPath,
         ));
+    if (_logoSalvo != _logoPath) await excluirFoto(_logoSalvo);
+    _logoSalvo = _logoPath;
     mensageiro.showSnackBar(const SnackBar(content: Text('Dados salvos')));
+  }
+
+  void _trocarLogo(String caminho) {
+    if (_logoPath != _logoSalvo) excluirFoto(_logoPath);
+    setState(() => _logoPath = caminho);
   }
 
   @override
@@ -64,7 +74,7 @@ class _TelaMinhaVitrineState extends State<TelaMinhaVitrine> {
             SeletorFoto(
               caminho: _logoPath,
               icone: Icons.storefront_outlined,
-              aoAlterar: (caminho) => setState(() => _logoPath = caminho),
+              aoAlterar: _trocarLogo,
             ),
             const SizedBox(height: 16),
             TextFormField(

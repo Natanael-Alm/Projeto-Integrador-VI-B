@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../models/produto.dart';
 import '../../providers/catalogo_provider.dart';
 import '../../widgets/cartao_produto.dart';
+import '../mais/dados_exemplo.dart';
 import 'compartilhar_catalogo.dart';
 import 'tela_categorias.dart';
 import 'tela_produto_form.dart';
@@ -91,7 +92,21 @@ class TelaCatalogo extends StatelessWidget {
       return const Center(child: CircularProgressIndicator());
     }
     if (catalogo.produtos.isEmpty) {
-      return const Center(child: Text('Nenhum produto encontrado'));
+      final catalogoVazio =
+          catalogo.busca.isEmpty && catalogo.categoriaSelecionada == null;
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Nenhum produto encontrado'),
+            if (catalogoVazio)
+              TextButton(
+                onPressed: () => carregarDadosExemplo(context),
+                child: const Text('Carregar dados de exemplo'),
+              ),
+          ],
+        ),
+      );
     }
 
     return GridView.builder(

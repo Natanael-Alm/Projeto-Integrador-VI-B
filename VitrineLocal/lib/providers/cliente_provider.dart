@@ -9,9 +9,14 @@ class ClienteProvider extends ChangeNotifier {
   List<Cliente> clientes = [];
   String busca = '';
   bool carregando = true;
+  int _ultimaConsulta = 0;
 
   Future<void> carregar() async {
-    clientes = await _repositorio.listar(busca: busca);
+    final consulta = ++_ultimaConsulta;
+    final resultado = await _repositorio.listar(busca: busca);
+    if (consulta != _ultimaConsulta) return;
+
+    clientes = resultado;
     carregando = false;
     notifyListeners();
   }

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../models/produto.dart';
 import '../../providers/catalogo_provider.dart';
 import '../../utils/formatadores.dart';
+import '../../utils/imagens.dart';
 import '../../widgets/seletor_foto.dart';
 
 class TelaProdutoForm extends StatefulWidget {
@@ -28,13 +29,16 @@ class _TelaProdutoFormState extends State<TelaProdutoForm> {
     text: widget.produto?.estoque.toString() ?? '0',
   );
   late int? _categoriaId = widget.produto?.categoriaId;
-  late String? _fotoPath = widget.produto?.fotoPath;
+  late final String? _fotoOriginal = widget.produto?.fotoPath;
+  late String? _fotoPath = _fotoOriginal;
   late bool _ativo = widget.produto?.ativo ?? true;
+  bool _salvo = false;
 
   bool get _editando => widget.produto != null;
 
   @override
   void dispose() {
+    if (!_salvo && _fotoPath != _fotoOriginal) excluirFoto(_fotoPath);
     _nome.dispose();
     _descricao.dispose();
     _preco.dispose();
@@ -59,7 +63,14 @@ class _TelaProdutoFormState extends State<TelaProdutoForm> {
     );
 
     await context.read<CatalogoProvider>().salvarProduto(produto);
+    _salvo = true;
+    if (_fotoPath != _fotoOriginal) await excluirFoto(_fotoOriginal);
     if (mounted) Navigator.pop(context);
+  }
+
+  void _trocarFoto(String caminho) {
+    if (_fotoPath != _fotoOriginal) excluirFoto(_fotoPath);
+    setState(() => _fotoPath = caminho);
   }
 
   Future<void> _excluir() async {
@@ -117,7 +128,7 @@ class _TelaProdutoFormState extends State<TelaProdutoForm> {
           children: [
             SeletorFoto(
               caminho: _fotoPath,
-              aoAlterar: (caminho) => setState(() => _fotoPath = caminho),
+              aoAlterar: _trocarFoto,
             ),
             const SizedBox(height: 16),
             TextFormField(

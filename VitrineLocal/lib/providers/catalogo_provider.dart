@@ -18,6 +18,7 @@ class CatalogoProvider extends ChangeNotifier {
   String busca = '';
   int? categoriaSelecionada;
   bool carregando = true;
+  int _ultimaConsulta = 0;
 
   List<Categoria> get categoriasAtivas =>
       categorias.where((categoria) => categoria.ativa).toList();
@@ -31,14 +32,22 @@ class CatalogoProvider extends ChangeNotifier {
 
   Future<void> carregar() async {
     categorias = await _categoriaRepo.listar();
+    if (!categoriasAtivas.any((c) => c.id == categoriaSelecionada)) {
+      categoriaSelecionada = null;
+    }
     await _carregarProdutos();
   }
 
   Future<void> _carregarProdutos() async {
-    produtos = await _produtoRepo.listar(
+    final consulta = ++_ultimaConsulta;
+    final resultado = await _produtoRepo.listar(
       busca: busca,
       categoriaId: categoriaSelecionada,
     );
+    // Uma busca mais nova já começou: descarta este resultado antigo.
+    if (consulta != _ultimaConsulta) return;
+
+    produtos = resultado;
     carregando = false;
     notifyListeners();
   }
@@ -77,7 +86,6 @@ class CatalogoProvider extends ChangeNotifier {
 
   Future<void> excluirCategoria(int id) async {
     await _categoriaRepo.excluir(id);
-    if (categoriaSelecionada == id) categoriaSelecionada = null;
     await carregar();
   }
 
