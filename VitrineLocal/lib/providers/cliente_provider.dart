@@ -16,6 +16,8 @@ class ClienteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<List<Cliente>> todos() => _repositorio.listar();
+
   Future<void> buscar(String texto) async {
     busca = texto;
     await carregar();

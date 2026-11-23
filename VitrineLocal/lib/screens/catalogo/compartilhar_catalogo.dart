@@ -35,7 +35,7 @@ Future<void> compartilharCatalogo(BuildContext context) async {
   );
   if (canal == null) return;
 
-  final produtos = await catalogo.produtosParaCompartilhar();
+  final produtos = await catalogo.produtosAtivos();
   if (produtos.isEmpty) {
     mensageiro.showSnackBar(
       const SnackBar(content: Text('Nenhum produto ativo para compartilhar')),

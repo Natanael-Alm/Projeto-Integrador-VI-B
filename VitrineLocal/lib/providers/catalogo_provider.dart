@@ -81,7 +81,7 @@ class CatalogoProvider extends ChangeNotifier {
     await carregar();
   }
 
-  Future<List<Produto>> produtosParaCompartilhar() =>
+  Future<List<Produto>> produtosAtivos() =>
       _produtoRepo.listar(somenteAtivos: true);
 
   Future<void> registrarDivulgacao(Canal canal, int qtdProdutos) =>

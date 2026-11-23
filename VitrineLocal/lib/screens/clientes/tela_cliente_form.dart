@@ -4,6 +4,8 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../models/cliente.dart';
 import '../../providers/cliente_provider.dart';
+import '../../providers/pedido_provider.dart';
+import 'tela_historico_cliente.dart';
 
 final _formatoEmail = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
 
@@ -53,8 +55,10 @@ class _TelaClienteFormState extends State<TelaClienteForm> {
     );
 
     final mensageiro = ScaffoldMessenger.of(context);
+    final pedidos = context.read<PedidoProvider>();
     try {
       await context.read<ClienteProvider>().salvar(cliente);
+      await pedidos.carregar();
       if (mounted) Navigator.pop(context);
     } on DatabaseException catch (erro) {
       if (!erro.isUniqueConstraintError()) rethrow;
@@ -84,7 +88,9 @@ class _TelaClienteFormState extends State<TelaClienteForm> {
     );
     if (confirmado != true || !mounted) return;
 
+    final pedidos = context.read<PedidoProvider>();
     await context.read<ClienteProvider>().excluir(widget.cliente!.id!);
+    await pedidos.carregar();
     if (mounted) Navigator.pop(context);
   }
 
@@ -140,6 +146,20 @@ class _TelaClienteFormState extends State<TelaClienteForm> {
             ),
             const SizedBox(height: 24),
             FilledButton(onPressed: _salvar, child: const Text('Salvar')),
+            if (_editando) ...[
+              const SizedBox(height: 8),
+              OutlinedButton.icon(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        TelaHistoricoCliente(cliente: widget.cliente!),
+                  ),
+                ),
+                icon: const Icon(Icons.receipt_long_outlined),
+                label: const Text('Histórico de compras'),
+              ),
+            ],
           ],
         ),
       ),

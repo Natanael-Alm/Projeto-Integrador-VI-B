@@ -55,7 +55,7 @@ flutter run         # emulador ou celular com depuração USB
 |---|---|
 | Base: banco SQLite, navegação, tema | Concluído |
 | Catálogo (RF01–RF06) e Sobre (RF20) | Concluído |
-| Clientes e Pedidos (RF07–RF12) | Próxima etapa |
+| Clientes e Pedidos (RF07–RF12) | Concluído |
 | Painel e Relatórios (RF13–RF19) | Próxima etapa |
 
 ## Estrutura do repositório

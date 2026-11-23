@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 
 final _moeda = NumberFormat.currency(locale: 'pt_BR', symbol: r'R$');
 final _data = DateFormat('dd/MM/yyyy', 'pt_BR');
+final _dataHora = DateFormat("dd/MM/yyyy 'às' HH:mm", 'pt_BR');
 
 String formatarMoeda(int centavos) => _moeda.format(centavos / 100);
 
@@ -26,3 +27,5 @@ int? textoParaCentavos(String texto) {
 }
 
 String formatarData(DateTime data) => _data.format(data);
+
+String formatarDataHora(DateTime data) => _dataHora.format(data);
