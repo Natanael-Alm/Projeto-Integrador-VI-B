@@ -106,7 +106,8 @@ class RelatorioRepository {
     final db = await _helper.database;
     final linhas = await db.rawQuery(
       '''
-      SELECT c.nome,
+      SELECT c.id,
+             c.nome,
              MIN(p.data_pedido) AS primeira_compra,
              MAX(p.data_pedido) AS ultima_compra,
              SUM(CASE WHEN p.data_pedido >= ? THEN 1 ELSE 0 END) AS pedidos_90_dias
@@ -126,10 +127,15 @@ class RelatorioRepository {
 
   // RN07: classificação por recência e frequência de compra.
   ClienteComPerfil _classificar(Map<String, Object?> linha, DateTime hoje) {
+    final clienteId = linha['id'] as int;
     final nome = linha['nome'] as String;
     final ultimaCompra = linha['ultima_compra'] as String?;
     if (ultimaCompra == null) {
-      return ClienteComPerfil(nome: nome, perfil: PerfilCliente.inativo);
+      return ClienteComPerfil(
+        clienteId: clienteId,
+        nome: nome,
+        perfil: PerfilCliente.inativo,
+      );
     }
 
     final primeiraCompra = linha['primeira_compra'] as String;
@@ -151,6 +157,7 @@ class RelatorioRepository {
     }
 
     return ClienteComPerfil(
+      clienteId: clienteId,
       nome: nome,
       perfil: perfil,
       diasDesdeUltimaCompra: diasUltima,

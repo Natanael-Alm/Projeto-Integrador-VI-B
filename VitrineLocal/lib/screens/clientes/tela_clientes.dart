@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/cliente.dart';
 import '../../providers/cliente_provider.dart';
+import '../../widgets/etiqueta_perfil.dart';
 import 'tela_cliente_form.dart';
 
 class TelaClientes extends StatelessWidget {
@@ -58,11 +59,18 @@ class TelaClientes extends StatelessWidget {
       separatorBuilder: (_, _) => const Divider(height: 1),
       itemBuilder: (context, indice) {
         final cliente = provider.clientes[indice];
+        final perfil = provider.perfis[cliente.id];
         return ListTile(
           leading: CircleAvatar(child: Text(cliente.nome[0].toUpperCase())),
           title: Text(cliente.nome),
           subtitle: cliente.telefone == null ? null : Text(cliente.telefone!),
-          trailing: const Icon(Icons.chevron_right),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (perfil != null) EtiquetaPerfil(perfil: perfil),
+              const Icon(Icons.chevron_right),
+            ],
+          ),
           onTap: () => _abrirCliente(context, cliente),
         );
       },

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../models/item_pedido.dart';
 import '../../models/pedido.dart';
 import '../../providers/catalogo_provider.dart';
+import '../../providers/cliente_provider.dart';
 import '../../providers/pedido_provider.dart';
 import '../../utils/formatadores.dart';
 import '../../widgets/cartao_pedido.dart';
@@ -55,8 +56,10 @@ class _TelaPedidoDetalheState extends State<TelaPedidoDetalhe> {
 
     final mensageiro = ScaffoldMessenger.of(context);
     final catalogo = context.read<CatalogoProvider>();
+    final clientes = context.read<ClienteProvider>();
     await context.read<PedidoProvider>().cancelar(widget.pedido.id!);
     await catalogo.carregar();
+    await clientes.carregar();
 
     mensageiro.showSnackBar(const SnackBar(content: Text('Pedido cancelado')));
     if (mounted) Navigator.pop(context);

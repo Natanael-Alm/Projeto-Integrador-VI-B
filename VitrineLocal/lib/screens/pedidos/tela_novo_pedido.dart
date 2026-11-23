@@ -101,6 +101,7 @@ class _TelaNovoPedidoState extends State<TelaNovoPedido> {
 
     final mensageiro = ScaffoldMessenger.of(context);
     final catalogo = context.read<CatalogoProvider>();
+    final clientes = context.read<ClienteProvider>();
     try {
       await context.read<PedidoProvider>().registrar(
         clienteId: _clienteId,
@@ -110,6 +111,7 @@ class _TelaNovoPedidoState extends State<TelaNovoPedido> {
         pago: _pago,
       );
       await catalogo.carregar();
+      await clientes.carregar();
       mensageiro.showSnackBar(
         const SnackBar(content: Text('Pedido registrado')),
       );

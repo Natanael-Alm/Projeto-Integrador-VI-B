@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../relatorios/tela_relatorios.dart';
 import 'dados_exemplo.dart';
+import 'tela_backup.dart';
 import 'tela_minha_vitrine.dart';
 import 'tela_sobre.dart';
 
@@ -35,6 +36,12 @@ class TelaMais extends StatelessWidget {
             title: const Text('Sobre o app'),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => _abrir(context, const TelaSobre()),
+          ),
+          ListTile(
+            leading: const Icon(Icons.backup_outlined),
+            title: const Text('Backup e restauração'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => _abrir(context, const TelaBackup()),
           ),
           ListTile(
             leading: const Icon(Icons.dataset_outlined),

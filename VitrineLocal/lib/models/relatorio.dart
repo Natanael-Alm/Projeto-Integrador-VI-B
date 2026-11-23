@@ -40,25 +40,32 @@ class ItemCurvaAbc {
 }
 
 enum PerfilCliente {
-  novo('Novos', 'Primeira compra há 30 dias ou menos'),
-  fiel('Fiéis', '3 ou mais pedidos nos últimos 90 dias'),
-  regular('Regulares', 'Compraram nos últimos 60 dias'),
-  emRisco('Em risco', 'Última compra entre 60 e 120 dias atrás'),
-  inativo('Inativos', 'Última compra há mais de 120 dias ou nenhuma');
+  novo('Novos', 'Novo', 'Primeira compra há 30 dias ou menos'),
+  fiel('Fiéis', 'Fiel', '3 ou mais pedidos nos últimos 90 dias'),
+  regular('Regulares', 'Regular', 'Compraram nos últimos 60 dias'),
+  emRisco('Em risco', 'Em risco', 'Última compra entre 60 e 120 dias atrás'),
+  inativo(
+    'Inativos',
+    'Inativo',
+    'Última compra há mais de 120 dias ou nenhuma',
+  );
 
-  const PerfilCliente(this.rotulo, this.regra);
+  const PerfilCliente(this.rotulo, this.etiqueta, this.regra);
 
   final String rotulo;
+  final String etiqueta;
   final String regra;
 }
 
 class ClienteComPerfil {
   const ClienteComPerfil({
+    required this.clienteId,
     required this.nome,
     required this.perfil,
     this.diasDesdeUltimaCompra,
   });
 
+  final int clienteId;
   final String nome;
   final PerfilCliente perfil;
   final int? diasDesdeUltimaCompra;
