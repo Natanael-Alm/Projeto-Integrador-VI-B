@@ -1,10 +1,12 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:provider/provider.dart';
 
+import 'providers/painel_provider.dart';
 import 'screens/catalogo/tela_catalogo.dart';
 import 'screens/clientes/tela_clientes.dart';
 import 'screens/mais/tela_mais.dart';
+import 'screens/painel/tela_painel.dart';
 import 'screens/pedidos/tela_pedidos.dart';
-import 'screens/tela_em_breve.dart';
 
 const _corPrincipal = Color(0xFF374151);
 
@@ -42,15 +44,20 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
-  int _abaAtual = 1;
+  int _abaAtual = 0;
 
   static const _telas = [
-    TelaEmBreve(titulo: 'Vitrine', icone: Icons.dashboard_outlined),
+    TelaPainel(),
     TelaCatalogo(),
     TelaPedidos(),
     TelaClientes(),
     TelaMais(),
   ];
+
+  void _trocarAba(int indice) {
+    if (indice == 0) context.read<PainelProvider>().carregar();
+    setState(() => _abaAtual = indice);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +65,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       body: IndexedStack(index: _abaAtual, children: _telas),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _abaAtual,
-        onDestinationSelected: (indice) => setState(() => _abaAtual = indice),
+        onDestinationSelected: _trocarAba,
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Início'),
           NavigationDestination(icon: Icon(Icons.grid_view), label: 'Catálogo'),

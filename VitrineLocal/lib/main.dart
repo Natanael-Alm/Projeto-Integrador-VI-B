@@ -7,6 +7,7 @@ import 'app.dart';
 import 'providers/catalogo_provider.dart';
 import 'providers/cliente_provider.dart';
 import 'providers/empresa_provider.dart';
+import 'providers/painel_provider.dart';
 import 'providers/pedido_provider.dart';
 
 Future<void> main() async {
@@ -21,7 +22,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => EmpresaProvider()..carregar()),
         ChangeNotifierProvider(create: (_) => ClienteProvider()..carregar()),
         ChangeNotifierProvider(create: (_) => PedidoProvider()..carregar()),
-      ],
+        ChangeNotifierProvider(create: (_) => PainelProvider()..carregar()),      ],
       child: const VitrineApp(),
     ),
   );
