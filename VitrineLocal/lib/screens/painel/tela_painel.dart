@@ -6,6 +6,7 @@ import '../../providers/painel_provider.dart';
 import '../../utils/formatadores.dart';
 import '../../widgets/cartao_indicador.dart';
 import '../../widgets/grafico_barras.dart';
+import '../relatorios/tela_relatorios.dart';
 
 class TelaPainel extends StatelessWidget {
   const TelaPainel({super.key});
@@ -116,6 +117,15 @@ class TelaPainel extends StatelessWidget {
                       subtitle: Text('${produto.quantidade} unidades'),
                       trailing: Text(formatarMoeda(produto.receitaCentavos)),
                     ),
+                  const SizedBox(height: 8),
+                  OutlinedButton.icon(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const TelaRelatorios()),
+                    ),
+                    icon: const Icon(Icons.bar_chart_outlined),
+                    label: const Text('Ver relatórios'),
+                  ),
                 ],
               ),
             ),

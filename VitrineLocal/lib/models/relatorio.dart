@@ -20,6 +20,62 @@ class VendaDoDia {
   final int centavos;
 }
 
+class BarraDoGrafico {
+  const BarraDoGrafico(this.rotulo, this.centavos);
+
+  final String rotulo;
+  final int centavos;
+}
+
+class ItemCurvaAbc {
+  const ItemCurvaAbc({
+    required this.produto,
+    required this.percentual,
+    required this.classe,
+  });
+
+  final ProdutoVendido produto;
+  final double percentual;
+  final String classe;
+}
+
+enum PerfilCliente {
+  novo('Novos', 'Primeira compra há 30 dias ou menos'),
+  fiel('Fiéis', '3 ou mais pedidos nos últimos 90 dias'),
+  regular('Regulares', 'Compraram nos últimos 60 dias'),
+  emRisco('Em risco', 'Última compra entre 60 e 120 dias atrás'),
+  inativo('Inativos', 'Última compra há mais de 120 dias ou nenhuma');
+
+  const PerfilCliente(this.rotulo, this.regra);
+
+  final String rotulo;
+  final String regra;
+}
+
+class ClienteComPerfil {
+  const ClienteComPerfil({
+    required this.nome,
+    required this.perfil,
+    this.diasDesdeUltimaCompra,
+  });
+
+  final String nome;
+  final PerfilCliente perfil;
+  final int? diasDesdeUltimaCompra;
+}
+
+class EfeitoDivulgacao {
+  const EfeitoDivulgacao({
+    required this.compartilhamentos,
+    required this.pedidosPorDiaDepois,
+    required this.pedidosPorDiaGeral,
+  });
+
+  final int compartilhamentos;
+  final double pedidosPorDiaDepois;
+  final double pedidosPorDiaGeral;
+}
+
 class ProdutoVendido {
   const ProdutoVendido({
     required this.nome,

@@ -9,6 +9,7 @@ import 'providers/cliente_provider.dart';
 import 'providers/empresa_provider.dart';
 import 'providers/painel_provider.dart';
 import 'providers/pedido_provider.dart';
+import 'providers/relatorios_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,9 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => EmpresaProvider()..carregar()),
         ChangeNotifierProvider(create: (_) => ClienteProvider()..carregar()),
         ChangeNotifierProvider(create: (_) => PedidoProvider()..carregar()),
-        ChangeNotifierProvider(create: (_) => PainelProvider()..carregar()),      ],
+        ChangeNotifierProvider(create: (_) => PainelProvider()..carregar()),
+        ChangeNotifierProvider(create: (_) => RelatoriosProvider()),
+      ],
       child: const VitrineApp(),
     ),
   );

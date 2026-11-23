@@ -28,7 +28,7 @@
 | RF13 | Painel inicial com faturamento do mês, número de pedidos, ticket médio e novos clientes |
 | RF14 | Gráfico de vendas por dia, semana ou mês |
 | RF15 | Ranking de produtos mais vendidos e **curva ABC** |
-| RF16 | Classificação de clientes por recência e frequência: fiéis, novos, em risco e inativos |
+| RF16 | Classificação de clientes por recência e frequência: novos, fiéis, regulares, em risco e inativos |
 | RF17 | Indicador de tendência de vendas por média móvel de 7 dias |
 | RF18 | Relatório de produtos com estoque baixo |
 | RF19 | Exportar resumo dos relatórios em arquivo CSV |
@@ -58,9 +58,10 @@
 - **RN04:** Total do pedido = soma dos subtotais dos itens − desconto. O desconto não pode ser maior que a soma dos itens.
 - **RN05:** Cancelar um pedido devolve ao estoque as quantidades dos itens.
 - **RN06:** Produto com pedidos vinculados não é excluído, apenas desativado.
-- **RN07:** Classificação de clientes (considerando a data de referência = hoje):
+- **RN07:** Classificação de clientes (considerando a data de referência = hoje e ignorando pedidos cancelados). As regras são verificadas nesta ordem e o cliente recebe o primeiro perfil que atender:
   - **Novo:** primeira compra há 30 dias ou menos
   - **Fiel:** 3 ou mais pedidos nos últimos 90 dias
+  - **Regular:** última compra há menos de 60 dias (sem ser novo nem fiel)
   - **Em risco:** última compra entre 60 e 120 dias atrás
   - **Inativo:** última compra há mais de 120 dias ou nenhuma compra
 
