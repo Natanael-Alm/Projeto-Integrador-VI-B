@@ -27,7 +27,16 @@ flutter run            # emulador Android ou celular com depuração USB
 ```bash
 keytool -genkey -v -keystore ~/vitrine-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias vitrine
 ```
-Criar o arquivo `android/key.properties` (**não versionar no Git**) com `storePassword`, `keyPassword`, `keyAlias` e `storeFile`, e referenciá-lo em `android/app/build.gradle.kts` na configuração `signingConfigs`.
+Criar o arquivo `android/key.properties` (**não versionar no Git**; já está no `.gitignore`):
+```properties
+storePassword=<senha>
+keyPassword=<senha>
+keyAlias=vitrine
+storeFile=C:/Users/<usuario>/vitrine-key.jks
+```
+O `android/app/build.gradle.kts` lê esse arquivo e assina o APK de release com a chave. Se o arquivo não existir (por exemplo, em outro computador do grupo), o release é assinado com a chave de depuração, o que permite compilar, mas não atualizar um app instalado com a chave oficial.
+
+> Guarde uma cópia da chave `.jks` e do `key.properties` fora do repositório. Sem eles não é possível publicar atualizações assinadas com a mesma chave.
 
 ### 4. Gerar o APK de produção
 ```bash
@@ -49,6 +58,6 @@ flutter build apk --split-per-abi
 
 ## Observações
 - Durante o desenvolvimento, o APK de depuração pode ser gerado com `flutter build apk --debug`.
-- O APK final será anexado em uma *release* do repositório do GitHub nas etapas seguintes do projeto.
+- O APK final é anexado em uma *release* do repositório do GitHub (aba **Releases**).
 
 Referência oficial: [Build and release an Android app](https://docs.flutter.dev/deployment/android).

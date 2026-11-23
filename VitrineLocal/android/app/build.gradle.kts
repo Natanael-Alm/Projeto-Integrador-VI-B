@@ -1,7 +1,17 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+}
+
+// Senhas da chave de assinatura (arquivo fora do Git, ver docs/08-geracao-apk.md).
+val arquivoDaChave = rootProject.file("key.properties")
+val dadosDaChave = Properties()
+if (arquivoDaChave.exists()) {
+    dadosDaChave.load(FileInputStream(arquivoDaChave))
 }
 
 android {
@@ -22,10 +32,22 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = dadosDaChave.getProperty("keyAlias")
+            keyPassword = dadosDaChave.getProperty("keyPassword")
+            storeFile = dadosDaChave.getProperty("storeFile")?.let { file(it) }
+            storePassword = dadosDaChave.getProperty("storePassword")
+        }
+    }
+
     buildTypes {
         release {
-            // Assinatura de release (keystore) entra na etapa de geração do APK.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = if (arquivoDaChave.exists()) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
 }
